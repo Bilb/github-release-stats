@@ -149,11 +149,13 @@ function showStats(data) {
             lastUpdate +
             ' &mdash; Downloaded ' +
             asset.download_count.toLocaleString(); // Download count number is formatted based on client's browser locale (e.g. 200 000 vs. 200,000).
+          if(!asset.name.endsWith('.yml') && !asset.name.endsWith('.blockmap') && !asset.name.endsWith('.asc')) {
           asset.download_count == 1
             ? (downloadInfoHTML += ' time</i></li>')
             : (downloadInfoHTML += ' times</i></li>');
           totalDownloadCount += asset.download_count;
-          ReleaseDownloadCount += asset.download_count;
+            ReleaseDownloadCount += asset.download_count;
+          }
         });
       } else {
         downloadInfoHTML =
@@ -183,7 +185,7 @@ function showStats(data) {
 
       if (hasAssets) {
         html +=
-          "<li><span class='glyphicon glyphicon-download'></span>&nbsp&nbspDownloads: " +
+          "<li><span class='glyphicon glyphicon-download'></span>&nbsp&nbspDownloads (without .yml, .blockmap & .asc): " +
           ReleaseDownloadCount.toLocaleString() +
           '</li>';
       }
